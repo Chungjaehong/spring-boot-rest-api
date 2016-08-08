@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Post Form</title>
+</head>
+<body>
+<h1 th:if="${seq == null}">New Post</h1>
+<h1 th:if="${seq}">Modify Post</h1>
+
+<form action="#" th:action="@{/posts}" th:object="${post}" method="post" enctype="multipart/form-data">
+<!-- <input type="hidden" name="_method" value="PATCH"> -->
+<table>
+	<tr th:if="${seq}">
+		<th>seq</th>
+		<td><input type="text" th:field="*{seq}" readonly="readonly" /></td>
+	</tr>
+	<tr>
+		<th>title</th>
+		<td><input type="text" th:field="*{title}" /></td>
+	</tr>
+	<tr>
+		<th>content</th>
+		<td><textarea th:field="*{content}"></textarea></td>
+	</tr>
+	<tr>
+		<th>file</th>
+		<td>
+			<input type="file" th:field="*{attach}"/><br />
+			<input type="text" th:field="*{file}" readonly="readonly" />
+		</td>
+	</tr>
+	<tr>
+		<th>reg_id</th>
+		<td><input type="text" th:field="*{reg_id}" /></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td style="padding-top:20px;"><input type="submit" value="저장" /></td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

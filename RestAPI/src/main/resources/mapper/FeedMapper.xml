@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.son.restapi.repository.FeedRepository">
+	<select id="getFeedsAll" parameterType="String" resultType="com.son.restapi.repository.vo.PostVO">
+		SELECT z.*
+		FROM
+		(
+			SELECT *
+			FROM post
+			WHERE reg_id = #{from_id}
+			UNION DISTINCT
+		    SELECT a.*
+		    FROM post AS a
+		    INNER JOIN follow AS b ON b.to_id = a.reg_id
+		    WHERE b.from_id = #{from_id}
+		) AS z
+		ORDER BY z.seq desc;
+	</select>
+	
+	<select id="getFeeds" parameterType="String" resultType="com.son.restapi.repository.vo.PostVO">
+		SELECT a.*
+	    FROM post AS a
+	    INNER JOIN follow AS b ON b.to_id = a.reg_id
+	    WHERE b.from_id = #{from_id}
+	    AND b.to_id = #{to_id}
+	    ORDER BY a.seq desc;
+	</select>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.son.restapi.repository.PostRepository">
+	<select id="getPosts" resultType="com.son.restapi.repository.vo.PostVO">
+		SELECT *
+		FROM post
+		ORDER BY seq DESC
+	</select>
+	
+	<select id="getPost" parameterType="int" resultType="com.son.restapi.repository.vo.PostVO">
+		SELECT *
+		FROM post
+		WHERE seq = #{seq}
+	</select>
+	
+	<insert id="createPost" parameterType="com.son.restapi.repository.vo.PostVO" 
+			useGeneratedKeys="true" keyColumn="seq" keyProperty="seq">
+		INSERT INTO post
+			(title, content, file, reg_id, regist_dt, update_dt)
+		VALUES
+			(#{title}, #{content}, #{file}, #{reg_id}, NOW(), NOW())
+	</insert>
+	
+	<update id="updatePost" parameterType="com.son.restapi.repository.vo.PostVO">
+		UPDATE post
+		SET
+			  title = #{title}
+			, content = #{content}
+			, file = #{file}
+			, update_dt = NOW()
+		WHERE seq = #{seq}
+	</update>
+
+	<delete id="deletePost" parameterType="int">
+		DELETE FROM post
+		WHERE seq = #{seq}
+	</delete>
+</mapper>

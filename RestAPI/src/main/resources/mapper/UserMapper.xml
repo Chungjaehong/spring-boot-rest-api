@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.son.restapi.repository.UserRepository">
+	<select id="getUsers" resultType="com.son.restapi.repository.vo.UserVO">
+		SELECT * 
+		FROM user 
+		ORDER BY regist_dt DESC
+	</select>
+	
+	<select id="getUser" parameterType="String" resultType="com.son.restapi.repository.vo.UserVO">
+		SELECT * 
+		FROM user 
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<insert id="createUser" parameterType="com.son.restapi.repository.vo.UserVO" 
+			useGeneratedKeys="true" keyColumn="seq" keyProperty="seq">
+		INSERT INTO user
+			(user_id, user_name, regist_dt)
+		VALUES
+			(#{user_id}, #{user_name}, NOW())
+	</insert>
+	
+	<update id="updateUser" parameterType="com.son.restapi.repository.vo.UserVO">
+		UPDATE user
+		SET
+			  user_name = #{user_name}
+			, regist_dt = NOW()
+		WHERE user_id = #{user_id}
+	</update>
+	
+	<delete id="deleteUser" parameterType="String">
+		DELETE FROM user
+		WHERE user_id = #{user_id}
+	</delete>
+</mapper>
