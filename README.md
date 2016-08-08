@@ -3,8 +3,9 @@
 <b>1. 개발환경</b><br/>
 jdk1.7<br/>
 MySQL<br/>
-<br/>
-2. 사전에 DB 스키마, 테이블 생성 필요
+<br/><br/>
+
+<b>2. 사전에 DB 스키마, 테이블 생성 필요</b><br/>
 create schema codetest;
 
 use codetest;
