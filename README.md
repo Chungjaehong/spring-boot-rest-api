@@ -1,11 +1,10 @@
 # spring-boot-rest-api
 
-1. 개발환경
-jdk1.7
-MySQL
-
+<b>1. 개발환경</b><br/>
+jdk1.7<br/>
+MySQL<br/>
+<br/>
 2. 사전에 DB 스키마, 테이블 생성 필요
------------------------------------------------------------
 create schema codetest;
 
 use codetest;
@@ -38,4 +37,3 @@ CREATE TABLE post
 	update_dt DATETIME NULL,
 	INDEX idx_post_reg_id(reg_id)
 );
------------------------------------------------------------
